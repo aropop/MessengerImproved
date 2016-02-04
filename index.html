@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>Messenger</title>
+</head>
+<body style="-webkit-app-region: drag">
+    <iframe style="width:100%;height:100%;border:0;padding:0;margin:0;" src="https://www.messenger.com/login" scrolling="no" nwdisable nwfaketop></iframe>
+<script>
+var frame = document.querySelector("iframe");
+var nw = require('nw.gui');
+frame.onload = function() {
+    // Override with default notifictions
+    frame.Notification = function(title, options) {
+        var n = new Notification(title, options);
+        n.onClick = function() {
+            nw.Window.get().focus();
+        };
+    };
+
+    // Replace with small media thingys
+    var mainel = frame.contentDocument.querySelector("div[role='main']");
+    var sidebar = mainel.previousSibling;
+    var banner = frame.contentDocument.querySelector("div[role='banner']");
+    sidebar.style.flexBasis = '74px';
+    sidebar.style.minWidth = '74px';
+    banner.removeChild(banner.children[1]);
+    var chatheads = frame.contentDocument.querySelectorAll('div[role=\'rowheader\']');
+    for (var i = 0; i < chatheads.length; i++) {
+        chatheads[i].children[0].children[1].style.display='none';
+    }
+};
+</script>
+</body>
+
+</html>

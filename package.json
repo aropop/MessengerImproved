@@ -1,0 +1,14 @@
+{
+  "name": "messenger-improved",
+  "version": "0.0.1",
+  "description": "Improved version of messenger",
+  "main": "index.html",
+  "scripts": {
+  },
+  "author": "Aropop",
+  "license": "ISC",
+  "window": {
+      "frame": true,
+      "toolbar": false
+    }
+}
