@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Messenger</title>
+    <title>MessengerImproved</title>
 </head>
 <body style="-webkit-app-region: drag">
     <iframe style="width:100%;height:100%;border:0;padding:0;margin:0;" src="https://www.messenger.com/login" scrolling="no" nwdisable nwfaketop></iframe>
@@ -16,18 +16,26 @@ frame.onload = function() {
         };
     };
 
-    // Replace with small media thingys
+    // Modify to look like the small instance all the time
     var mainel = frame.contentDocument.querySelector("div[role='main']");
     var sidebar = mainel.previousSibling;
     var banner = frame.contentDocument.querySelector("div[role='banner']");
+    // Make only head visible
     sidebar.style.flexBasis = '74px';
     sidebar.style.minWidth = '74px';
+    // Remove "messenger" text element
     banner.removeChild(banner.children[1]);
+    // Make tekst invisible
     var chatheads = frame.contentDocument.querySelectorAll('div[role=\'rowheader\']');
     for (var i = 0; i < chatheads.length; i++) {
         chatheads[i].children[0].children[1].style.display='none';
     }
+
 };
+
+if(nw.App.filteredArgv.indexOf("--debug") !== -1){
+    nw.Window.get().showDevTools();
+}
 </script>
 </body>
 
